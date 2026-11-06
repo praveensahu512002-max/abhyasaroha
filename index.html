@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="hi">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#145b3c"><meta name="description" content="अभ्यासआरोह — पढ़ाई से सफलता की ओर">
+<link rel="manifest" href="manifest.webmanifest">
+<title>अभ्यासआरोह | पढ़ाई से सफलता की ओर</title>
+<style>
+:root{--green:#145b3c;--green2:#20734e;--gold:#e6b84a;--bg:#f3f7f4;--card:#fff;--ink:#193528;--muted:#65766c;--line:#dce7df}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:system-ui,-apple-system,"Noto Sans Devanagari",sans-serif}
+header{background:linear-gradient(120deg,#10452e,#20734e);color:white;padding:22px max(18px,calc((100% - 980px)/2));}
+.brand{display:flex;align-items:center;gap:12px}.logo{width:48px;height:48px;border-radius:50%;display:grid;place-items:center;background:#ffffff20;border:1px solid #ffffff70;font-size:25px}
+h1{font-size:24px;margin:0}.tag{font-size:13px;opacity:.9;margin-top:3px}.wrap{max-width:980px;margin:auto;padding:16px}
+nav{display:flex;gap:7px;overflow:auto;padding:10px 0;position:sticky;top:0;background:var(--bg);z-index:3}
+nav button,.btn{border:1px solid var(--line);border-radius:11px;padding:10px 13px;background:white;color:var(--green);font-weight:700;white-space:nowrap;cursor:pointer}
+nav button.active,.btn.primary{background:var(--green);border-color:var(--green);color:white}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:12px}.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px;margin:10px 0;box-shadow:0 2px 8px #1231}
+h2{font-size:20px;margin:4px 0 8px;color:var(--green)}h3{margin:0 0 7px;font-size:16px}.muted{color:var(--muted);font-size:13px;line-height:1.6}
+select,input{width:100%;padding:12px;border:1px solid var(--line);border-radius:10px;background:white;color:var(--ink);margin:7px 0 12px}
+.pills{display:flex;gap:7px;flex-wrap:wrap}.pill{border:1px solid var(--line);padding:7px 10px;border-radius:30px;background:#fff;cursor:pointer;font-size:13px}.pill.sel{background:#e8f4ec;border-color:var(--green);color:var(--green);font-weight:700}
+.option{display:block;width:100%;text-align:left;border:1px solid var(--line);border-radius:11px;padding:12px;background:#fff;margin:8px 0;cursor:pointer}.option:disabled{cursor:default}.option.good{border-color:#16834c;background:#edf8f0}.option.bad{border-color:#b94c4c;background:#fff0f0}
+.notice{background:#fff8e7;border:1px solid #f1d995;border-radius:12px;padding:12px;font-size:13px;line-height:1.6}.success{background:#eaf6ee;border:1px solid #cce7d3;border-radius:12px;padding:12px}
+footer{text-align:center;color:var(--muted);font-size:12px;padding:25px}
+@media(min-width:700px){.hero{display:grid;grid-template-columns:1.3fr 1fr;gap:12px;align-items:stretch}.hero .card{margin:10px 0}}
+</style>
+</head>
+<body>
+<header><div class="brand"><div class="logo">📚</div><div><h1>अभ्यासआरोह</h1><div class="tag">पढ़ाई से सफलता की ओर</div></div></div></header>
+<div class="wrap">
+<nav id="nav">
+<button class="active" data-tab="home">🏠 होम</button><button data-tab="theory">📖 थ्योरी</button><button data-tab="quiz">✍️ क्विज़</button><button data-tab="mock">📝 मॉक टेस्ट</button><button data-tab="progress">📊 प्रोग्रेस</button><button data-tab="sources">📚 स्रोत नीति</button>
+</nav>
+<main id="app" aria-live="polite"></main>
+<footer>अभ्यासआरोह • शुरुआती वेब ऐप प्रोटोटाइप • नमूना सामग्री, परीक्षा-प्रमाणित सामग्री नहीं</footer>
+</div>
+<script>
+const exams=["CG Assistant Teacher","CG Teacher","CG Lecturer","SSC","Railway","UPSC","MPPSC","Police","Banking"];
+const subjects=[
+["बाल विकास एवं शिक्षाशास्त्र","विकास की अवधारणा, अधिगम, प्रेरणा और मूल्यांकन। यह नमूना परिचय है; अंतिम पाठ्यक्रम संबंधित परीक्षा की अधिसूचना से मिलाया जाएगा।"],
+["छत्तीसगढ़ सामान्य ज्ञान","इतिहास, भूगोल, संस्कृति, प्रशासन और अर्थव्यवस्था। प्रत्येक तथ्य को छत्तीसगढ़ शासन या अन्य प्राथमिक स्रोत से सत्यापित करना आवश्यक है।"],
+["भारतीय संविधान","प्रस्तावना, मौलिक अधिकार, राज्य के नीति-निर्देशक तत्व और संवैधानिक संस्थाएँ। आधिकारिक संविधान पाठ से संदर्भ जाँचा जाएगा।"],
+["हिंदी भाषा","व्याकरण, शब्द-रचना, वाक्य-विचार और भाषा कौशल।"]
+];
+const qs=[
+{q:"भारतीय संविधान कब लागू हुआ?",o:["15 अगस्त 1947","26 जनवरी 1950","26 नवम्बर 1949","2 अक्टूबर 1950"],a:1,e:"संविधान 26 जनवरी 1950 को लागू हुआ; 26 नवम्बर 1949 को अंगीकृत किया गया था।",s:"स्रोत सत्यापन: भारत का संविधान — आधिकारिक पाठ; संस्करण/अनुच्छेद विवरण प्रकाशन से पहले सत्यापित होगा।"},
+{q:"छत्तीसगढ़ राज्य का गठन कब हुआ?",o:["1 नवम्बर 2000","1 मई 1960","15 अगस्त 2001","26 जनवरी 2000"],a:0,e:"छत्तीसगढ़ राज्य 1 नवम्बर 2000 को अस्तित्व में आया।",s:"स्रोत सत्यापन: छत्तीसगढ़ शासन का आधिकारिक राज्य परिचय; सटीक URL और अद्यतन तिथि जोड़ना बाकी।"},
+{q:"सतत मूल्यांकन का प्रमुख उद्देश्य क्या है?",o:["केवल अंतिम अंक देना","सीखने में सुधार करना","दंड देना","केवल उपस्थिति देखना"],a:1,e:"सतत मूल्यांकन से सीखने की प्रगति समझकर समय पर सुधारात्मक सहायता दी जा सकती है।",s:"स्रोत सत्यापन: NCERT/SCERT की संबंधित मूल्यांकन सामग्री; संस्करण और पृष्ठ सत्यापित होने बाकी।"}
+];
+let tab="home",exam=exams[0],qi=0,chosen=null,score=0,attempts=0,correct=0;
+const app=document.getElementById("app");
+function go(t){tab=t;document.querySelectorAll("nav button").forEach(b=>b.classList.toggle("active",b.dataset.tab===t));render()}
+function card(s){return `<section class="card">${s}</section>`}
+function home(){return `<div class="hero">${card(`<h2>आपकी तैयारी, आपका साथी 👋</h2><p>परीक्षा चुनें और अपनी पढ़ाई शुरू करें। क्विज़ और मॉक टेस्ट पर कोई दैनिक प्रयास-सीमा नहीं।</p><label><b>परीक्षा चुनें</b></label><select id="exam">${exams.map(e=>`<option ${e===exam?"selected":""}>${e}</option>`).join("")}</select><div class="notice">अभी यह शुरुआती संस्करण है। प्रश्न और पाठ नमूना हैं; इन्हें सत्यापित परीक्षा सामग्री न मानें।</div>`)}
+${card(`<h2>सीखें और अभ्यास करें</h2><div class="grid"><button class="btn" onclick="go('theory')">📖 थ्योरी पढ़ें</button><button class="btn primary" onclick="start('quiz')">✍️ क्विज़ शुरू करें</button><button class="btn" onclick="start('mock')">📝 मॉक टेस्ट</button><button class="btn" onclick="go('progress')">📊 प्रोग्रेस देखें</button></div>`)}</div>
+${card(`<h3>इस ऐप में आगे जोड़ा जाएगा</h3><p class="muted">छात्र अकाउंट, सुरक्षित सिंक, ऑफलाइन नोट्स, स्वचालित स्रोत अपडेट, AI प्रश्न निर्माण, डुप्लिकेट जाँच और एडमिन समीक्षा।`)}`}
+function theory(){return `<h2>विषयवार थ्योरी</h2><p class="muted">${exam} • नमूना अध्याय</p>${subjects.map(([a,b])=>card(`<h3>${a}</h3><p>${b}</p><details><summary>अध्ययन लक्ष्य देखें</summary><p class="muted">अध्यायवार विस्तृत नोट्स, उदाहरण, शब्दार्थ, सारांश और अभ्यास प्रश्न यहाँ जोड़े जाएँगे। अंतिम पाठ्य सामग्री स्रोत-अनुमति और तथ्य-जाँच के बाद ही प्रकाशित होगी।</p></details>`)).join("")}`}
+function start(t){tab=t;qi=0;chosen=null;render();document.querySelectorAll("nav button").forEach(b=>b.classList.toggle("active",b.dataset.tab===t))}
+function test(){let q=qs[qi%qs.length];return card(`<h2>${tab==="quiz"?"अभ्यास क्विज़":"मॉक टेस्ट"}</h2><p class="muted">${exam} • डेमो प्रश्न ${qi+1} / ${qs.length}</p><h3 style="margin-top:18px">${q.q}</h3>${q.o.map((o,i)=>`<button class="option ${chosen!==null&&i===q.a?"good":chosen===i?"bad":""}" ${chosen!==null?"disabled":""} onclick="answer(${i})">${"ABCD"[i]}. ${o}</button>`).join("")}${chosen!==null?`<div class="success"><b>${chosen===q.a?"सही उत्तर ✓":"सही उत्तर: "+q.o[q.a]}</b><p>${q.e}</p><p class="muted">${q.s}</p><button class="btn primary" onclick="nextQ()">अगला प्रश्न</button></div>`:""}<p class="muted">नमूना प्रश्न बैंक सीमित है। वास्तविक अनलिमिटेड अभ्यास के लिए बड़े, सत्यापित प्रश्न बैंक और सर्वर की जरूरत होगी।</p>`)}
+function answer(i){if(chosen!==null)return;chosen=i;attempts++;if(i===qs[qi%qs.length].a)correct++;render()}
+function nextQ(){qi=(qi+1)%qs.length;chosen=null;render()}
+function progress(){return card(`<h2>आपकी प्रोग्रेस</h2><div class="grid"><div><h2>${attempts}</h2><p class="muted">कुल प्रयास (इस डिवाइस पर)</p></div><div><h2>${correct}</h2><p class="muted">सही उत्तर</p></div></div><p class="muted">अभी प्रोग्रेस केवल इस खुले सत्र में गिनी जाती है। लॉगिन/डेटाबेस जोड़ने के बाद इसे अकाउंट में सुरक्षित रखा जा सकेगा।</p><button class="btn" onclick="start('quiz')">फिर से अभ्यास करें</button>`)}
+function sources(){return `${card(`<h2>स्रोत और सत्यापन नीति</h2><p>अंतिम ऐप में केवल सार्वजनिक/आधिकारिक, खुले लाइसेंस या लिखित अनुमति प्राप्त सामग्री से तथ्य लिए जाएँगे।</p><ul><li>स्रोत शीर्षक, संस्था/लेखक और संस्करण दर्ज करना।</li><li>पृष्ठ संख्या तभी दिखाना जब उसी संस्करण से सत्यापित हो।</li><li>AI-निर्मित उत्तरों का मूल स्रोत से मिलान।</li><li>अस्पष्ट या विवादित प्रश्नों को प्रकाशित न करना।</li><li>कॉपीराइट वाली किताबों की पूरी सामग्री बिना अनुमति पुनर्प्रकाशित न करना।</li></ul>`)}
+${card(`<h3>प्रकाशन स्थिति</h3><p class="muted">अभी लाइव स्रोत-इम्पोर्ट, AI सत्यापन या स्वचालित प्रकाशन चालू नहीं है। इसके लिए बैकएंड, स्रोत लाइसेंस/अनुमति, API और सुरक्षा व्यवस्था आवश्यक है।`)}`}
+function render(){app.innerHTML=tab==="home"?home():tab==="theory"?theory():tab==="quiz"||tab==="mock"?test():tab==="progress"?progress():sources();let el=document.getElementById("exam");if(el)el.onchange=e=>{exam=e.target.value;render()}}
+document.querySelectorAll("nav button").forEach(b=>b.onclick=()=>go(b.dataset.tab));
+render();
+if("serviceWorker" in navigator && location.protocol.startsWith("http"))navigator.serviceWorker.register("./sw.js").catch(()=>{});
+</script>
+</body></html>
